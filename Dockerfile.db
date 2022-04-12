@@ -1,0 +1,9 @@
+FROM mariadb:latest
+
+ENV MARIADB_DATABASE=projecteq
+
+RUN apt update -y && \
+    apt install -y curl unzip net-tools && \
+    curl -L -o /tmp/latest.zip http://db.projecteq.net/latest && \
+    unzip /tmp/latest.zip -d /tmp && \
+    mv /tmp/peq-dump/create_tables_content.sql /docker-entrypoint-initdb.d
