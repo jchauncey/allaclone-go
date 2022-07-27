@@ -1,10 +1,10 @@
 GO              ?= go
 GOFLAGS         :=
 REPO_PATH       := github.com/jchauncey/allaclone
-GIT_VERSION     := $(shell git describe --tags --dirty)
-GIT_COMMIT      := $(shell git rev-parse HEAD)
-BUILD_DATE      := $(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
-LDFLAGS         := -s -X $(REPO_PATH)/cmd/version.GitVersion=$(GIT_VERSION) -X $(REPO_PATH)/cmd/version.GitCommit=$(GIT_COMMIT) -X $(REPO_PATH)/cmd/version.BuildDate=$(BUILD_DATE)
+#GIT_VERSION     := $(shell git describe --tags --dirty)
+#GIT_COMMIT      := $(shell git rev-parse HEAD)
+#BUILD_DATE      := $(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
+LDFLAGS         := -s
 BINDIR          := $(CURDIR)/bin
 CLI_NAME        ?= allaclone
 
@@ -16,7 +16,7 @@ clean:
 all: clean bin/$(CLI_NAME)
 
 bin/$(CLI_NAME):
-	CGO_ENABLED=0 $(GO) build -ldflags '$(LDFLAGS)' -o $(BINDIR)/$(CLI_NAME)
+	CGO_ENABLED=0 $(GO) build -o $(BINDIR)/$(CLI_NAME)
 
 .PHONY: clean-db
 clean-db:
